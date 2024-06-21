@@ -1,0 +1,68 @@
+[gd_scene load_steps=12 format=3 uid="uid://cvdideofmtakx"]
+
+[ext_resource type="Script" path="res://demo-fighting/scripts/Hitbox.gd" id="1_6j6ka"]
+[ext_resource type="Script" path="res://demo-fighting/scripts/Projectile.gd" id="1_57mqu"]
+[ext_resource type="PackedScene" uid="uid://c11kui7ciqrtv" path="res://demo-fighting/hit_effect.tscn" id="2_10bag"]
+[ext_resource type="Script" path="res://demo-fighting/scripts/HitBehavior.gd" id="3_e1mg6"]
+[ext_resource type="AudioStream" uid="uid://c6nk52sprnlqa" path="res://demo-fighting/assets/sd13.wav" id="4_sues0"]
+[ext_resource type="Texture2D" uid="uid://y2qiqet2veue" path="res://assets/godot.png" id="6_vgqy7"]
+[ext_resource type="PackedScene" uid="uid://dajimt2cej03q" path="res://demo-fighting/block_effect.tscn" id="7_8lnad"]
+[ext_resource type="AudioStream" uid="uid://bm7u2s8hs571e" path="res://demo-fighting/assets/bd01.wav" id="8_7hjq3"]
+
+[sub_resource type="SGRectangleShape2D" id="SGRectangleShape2D_iuwom"]
+extents_x = 1310720
+extents_y = 1310720
+
+[sub_resource type="Resource" id="Resource_p7j21"]
+script = ExtResource("3_e1mg6")
+damage = 150
+hit_state = "Hitstun"
+new_variables = {
+"accel_y": 50000,
+"speed_x": -400000,
+"speed_y": -700000
+}
+self_knockback = 0
+hitstop = 5
+sound = ExtResource("4_sues0")
+hit_effect = ExtResource("2_10bag")
+
+[sub_resource type="Resource" id="Resource_q0kus"]
+script = ExtResource("3_e1mg6")
+damage = 5
+hit_state = "Blockstun"
+new_variables = {
+"speed_x": -300000
+}
+self_knockback = 0
+hitstop = 5
+sound = ExtResource("8_7hjq3")
+hit_effect = ExtResource("7_8lnad")
+
+[node name="Projectile" type="SGCharacterBody2D"]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_57mqu")
+speed_x = 851968
+lifetime = 80
+
+[node name="SGCollisionShape2D" type="SGCollisionShape2D" parent="."]
+shape = SubResource("SGRectangleShape2D_iuwom")
+modulate = Color(1, 1, 1, 0.388235)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.626, 0.626)
+texture = ExtResource("6_vgqy7")
+
+[node name="Hitbox" type="SGArea2D" parent="."]
+collision_layer = 40
+collision_mask = 36
+modulate = Color(1, 1, 1, 0.34902)
+script = ExtResource("1_6j6ka")
+hit_behavior = SubResource("Resource_p7j21")
+air_hit_behavior = SubResource("Resource_p7j21")
+block_behavior = SubResource("Resource_q0kus")
+
+[node name="SGCollisionShape2D" type="SGCollisionShape2D" parent="Hitbox"]
+shape = SubResource("SGRectangleShape2D_iuwom")
+modulate = Color(1, 1, 1, 0.384314)

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="HitBehavior" load_steps=4 format=3 uid="uid://dfbckaivlb230"]
+
+[ext_resource type="PackedScene" uid="uid://dajimt2cej03q" path="res://demo-fighting/block_effect.tscn" id="1_pi2sb"]
+[ext_resource type="Script" path="res://demo-fighting/scripts/HitBehavior.gd" id="1_vw16w"]
+[ext_resource type="AudioStream" uid="uid://bm7u2s8hs571e" path="res://demo-fighting/assets/bd01.wav" id="2_1ix8r"]
+
+[resource]
+script = ExtResource("1_vw16w")
+damage = 5
+hit_state = "Blockstun"
+new_variables = {
+"speed_x": -300000
+}
+self_knockback = 2621440
+hitstop = 5
+sound = ExtResource("2_1ix8r")
+hit_effect = ExtResource("1_pi2sb")

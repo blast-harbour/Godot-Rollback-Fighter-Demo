@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://cogn1ej0v3jwp"]
+
+[ext_resource type="Texture2D" uid="uid://cchmxw5t02hi1" path="res://demo-fighting/assets/projectile_end.png" id="1_tnp4x"]
+[ext_resource type="Script" path="res://demo-fighting/scripts/HitEffect.gd" id="2_ibg5s"]
+[ext_resource type="Script" path="res://addons/delta_rollback/NetworkAnimationPlayer.gd" id="3_vk1dg"]
+[ext_resource type="Script" path="res://addons/delta_rollback/NetworkTimer.gd" id="4_fwirp"]
+
+[sub_resource type="Animation" id="Animation_p5wg7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_b3dpt"]
+resource_name = "pow"
+length = 0.500002
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wo13r"]
+_data = {
+"RESET": SubResource("Animation_p5wg7"),
+"pow": SubResource("Animation_b3dpt")
+}
+
+[node name="HitEffect" type="Sprite2D"]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("1_tnp4x")
+script = ExtResource("2_ibg5s")
+
+[node name="NetworkAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wo13r")
+}
+autoplay = "pow"
+script = ExtResource("3_vk1dg")
+
+[node name="DestroyTimer" type="Node" parent="."]
+script = ExtResource("4_fwirp")
+autostart = true
+wait_ticks = 60
+
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

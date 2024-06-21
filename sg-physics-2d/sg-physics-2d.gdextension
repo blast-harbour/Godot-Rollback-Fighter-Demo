@@ -1,0 +1,29 @@
+[configuration]
+
+entry_symbol = "sg_physics_2d_extension_init"
+compatibility_minimum = 4.1
+
+[icons]
+SGArea2D = "res://sg-physics-2d/icons/icon_s_g_area_2_d.svg"
+SGCapsuleShape2D = "res://sg-physics-2d/icons/icon_s_g_capsule_shape_2_d.svg"
+SGCharacterBody2D = "res://sg-physics-2d/icons/icon_s_g_character_body_2_d.svg"
+SGCircleShape2D = "res://sg-physics-2d/icons/icon_s_g_circle_shape_2_d.svg"
+SGCollisionPolygon2D = "res://sg-physics-2d/icons/icon_s_g_collision_polygon_2_d.svg"
+SGCollisionShape2D = "res://sg-physics-2d/icons/icon_s_g_collision_shape_2_d.svg"
+SGFixedNode2D = "res://sg-physics-2d/icons/icon_s_g_fixed_node_2_d.svg"
+SGFixedPosition2D = "res://sg-physics-2d/icons/icon_s_g_fixed_position_2_d.svg"
+SGFixedTransform2D = "res://sg-physics-2d/icons/icon_s_g_fixed_transform_2_d.svg"
+SGFixedVector2 = "res://sg-physics-2d/icons/icon_s_g_fixed_vector_2.svg"
+SGFixed = "res://sg-physics-2d/icons/icon_s_g_fixed.svg"
+SGRayCast2D = "res://sg-physics-2d/icons/icon_s_g_ray_cast_2_d.svg"
+SGRectangleShape2D = "res://sg-physics-2d/icons/icon_s_g_rectangle_shape_2_d.svg"
+SGRigidBody2D = "res://sg-physics-2d/icons/icon_s_g_rigid_body_2_d.svg"
+SGStaticBody2D = "res://sg-physics-2d/icons/icon_s_g_static_body_2_d.svg"
+
+[libraries]
+
+;linux.debug.x86_64 = "lib/libsgphysics2d.linux.template_debug.dev.x86_64.so"
+linux.debug.x86_64 = "lib/libsgphysics2d.linux.template_debug.x86_64.so"
+linux.release.x86_64 = "lib/libsgphysics2d.linux.template_release.x86_64.so"
+windows.debug.x86_64 = "lib/libsgphysics2d.windows.template_debug.x86_64.dll"
+windows.release.x86_64 = "lib/libsgphysics2d.windows.template_release.x86_64.dll"
