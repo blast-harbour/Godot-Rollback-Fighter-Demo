@@ -408,7 +408,8 @@ func get_hit():
 		hitbox.owner.move_has_hit = true
 		enemy = hitbox.fighter
 		var hitbox_index : int = enemy.active_hitboxes.find(hitbox, 0)
-		hitbox.owner.hit_tracker[hitbox_index] = true
+		if hitbox_index != -1:
+			hitbox.owner.hit_tracker[hitbox_index] = true
 		if !blocked_all_hits:
 			final_hit_behavior = hitbox.hit_behavior
 			final_hitbox = hitbox
