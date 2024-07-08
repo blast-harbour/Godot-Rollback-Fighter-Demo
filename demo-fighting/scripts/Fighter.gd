@@ -213,6 +213,8 @@ func input_process():
 		current_input_int = current_input_int ^ Directions.LEFT
 	elif x_axis == 1:
 		current_input_int = current_input_int ^ Directions.RIGHT
+	if y_axis == 0 and x_axis == 0:
+		current_input_int = Directions.NONE
 	input_history.append(current_input_int)
 	if input_history.size() > 15:
 		input_history.remove_at(0)
