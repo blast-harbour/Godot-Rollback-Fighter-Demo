@@ -16,9 +16,11 @@ The way commmand motions are processed
 
 @export var input_sequence_right : Array[Directions]
 @export var input_sequence_left : Array[Directions]
+@export var buffer_size : int = 15
 
 enum Directions {
-	NONE = 1 << 0,
+	ZERO = 0,
+	NONE = 1,
 	UP = 1 << 1,
 	DOWN = 1 << 2,
 	LEFT = 1 << 3,
@@ -31,9 +33,9 @@ enum Directions {
 
 func check_valid(input_dict : Dictionary) -> bool:
 	var input_condition : bool = false
-	var input_sequence : Array[Directions] = input_sequence_right
+	var input_sequence : Array[Directions] = input_sequence_right.duplicate()
 	if !fighter.facing_right:
-		input_sequence = input_sequence_left
+		input_sequence = input_sequence_left.duplicate()
 	input_sequence = input_sequence.duplicate()
 	input_sequence.reverse()
 	var history_step : int = fighter.input_history.size() - 1
@@ -51,6 +53,8 @@ func check_valid(input_dict : Dictionary) -> bool:
 					break
 			history_step -= 1
 		else:
+			break
+		if (history_step * -1) >= fighter.input_history.size() -1 or (history_step * -1) >= buffer_size:
 			break
 	
 	return input_condition

@@ -1349,7 +1349,7 @@ script = ExtResource("2_jvr8n")
 anim_name = "walkb"
 state_length = 20
 state_loop = true
-state_enter_events = [NodePath("CanBlock")]
+state_enter_events = [NodePath("CanBlock"), NodePath("CancelListEvent")]
 
 [node name="CanBlock" type="Node" parent="States/WalkB"]
 script = ExtResource("3_lf4i8")
@@ -1381,11 +1381,12 @@ script = ExtResource("3_gou7h")
 new_state = NodePath("../../../Fall")
 tick_range = Vector2i(99999, 99999)
 
-[node name="WalkF" type="Node" parent="States"]
+[node name="WalkF" type="Node" parent="States" node_paths=PackedStringArray("state_enter_events")]
 script = ExtResource("2_jvr8n")
 anim_name = "walkf"
 state_length = 20
 state_loop = true
+state_enter_events = [NodePath("CancelListEvent")]
 
 [node name="SetSpeed" type="Node" parent="States/WalkF"]
 script = ExtResource("3_lf4i8")
@@ -2054,25 +2055,80 @@ input_value = 1
 [node name="QCFMaster" type="Node" parent="Inputs"]
 script = ExtResource("14_mpnbq")
 
-[node name="QuarterCircleForward" type="Node" parent="Inputs/QCFMaster"]
+[node name="QCF" type="Node" parent="Inputs/QCFMaster"]
 script = ExtResource("13_7vb1f")
 input_sequence_right = Array[int]([4, 20, 16])
 input_sequence_left = Array[int]([4, 12, 8])
 
-[node name="QuarterCircleForward3" type="Node" parent="Inputs/QCFMaster"]
+[node name="QCF2" type="Node" parent="Inputs/QCFMaster"]
 script = ExtResource("13_7vb1f")
-input_sequence_right = Array[int]([4, 20, 16, 0])
-input_sequence_left = Array[int]([4, 12, 8, 0])
+input_sequence_right = Array[int]([4, 20, 16, 1])
+input_sequence_left = Array[int]([4, 12, 8, 1])
 
-[node name="QuarterCircleForward2" type="Node" parent="Inputs/QCFMaster"]
+[node name="QCF3" type="Node" parent="Inputs/QCFMaster"]
 script = ExtResource("13_7vb1f")
 input_sequence_right = Array[int]([4, 16])
 input_sequence_left = Array[int]([4, 8])
 
-[node name="QuarterCircleForward4" type="Node" parent="Inputs/QCFMaster"]
+[node name="QCF4" type="Node" parent="Inputs/QCFMaster"]
 script = ExtResource("13_7vb1f")
-input_sequence_right = Array[int]([4, 16, 0])
-input_sequence_left = Array[int]([4, 8, 0])
+input_sequence_right = Array[int]([4, 16, 1])
+input_sequence_left = Array[int]([4, 8, 1])
+
+[node name="DoubleQCFMaster" type="Node" parent="Inputs"]
+script = ExtResource("14_mpnbq")
+
+[node name="DoubleQCF" type="Node" parent="Inputs/DoubleQCFMaster"]
+script = ExtResource("13_7vb1f")
+input_sequence_right = Array[int]([4, 20, 16, 4, 20, 16])
+input_sequence_left = Array[int]([4, 12, 8, 4, 12, 8])
+buffer_size = 40
+
+[node name="DoubleQCF2" type="Node" parent="Inputs/DoubleQCFMaster"]
+script = ExtResource("13_7vb1f")
+input_sequence_right = Array[int]([4, 20, 16, 4, 20, 16, 1])
+input_sequence_left = Array[int]([4, 12, 8, 4, 12, 8, 1])
+buffer_size = 40
+
+[node name="DoubleQCF3" type="Node" parent="Inputs/DoubleQCFMaster"]
+script = ExtResource("13_7vb1f")
+input_sequence_right = Array[int]([4, 20, 16, 1, 4, 20, 16, 1])
+input_sequence_left = Array[int]([4, 12, 8, 1, 4, 12, 8, 1])
+buffer_size = 40
+
+[node name="DPMaster" type="Node" parent="Inputs"]
+script = ExtResource("14_mpnbq")
+
+[node name="DP" type="Node" parent="Inputs/DPMaster"]
+script = ExtResource("13_7vb1f")
+input_sequence_right = Array[int]([16, 4, 20])
+input_sequence_left = Array[int]([8, 4, 12])
+buffer_size = 20
+
+[node name="DP2" type="Node" parent="Inputs/DPMaster"]
+script = ExtResource("13_7vb1f")
+input_sequence_right = Array[int]([16, 1, 4, 20])
+input_sequence_left = Array[int]([8, 1, 4, 12])
+buffer_size = 20
+
+[node name="DP3" type="Node" parent="Inputs/DPMaster"]
+script = ExtResource("13_7vb1f")
+input_sequence_right = Array[int]([16, 1, 4, 20, 16])
+input_sequence_left = Array[int]([8, 1, 4, 12, 8])
+buffer_size = 20
+
+[node name="DownDownMaster" type="Node" parent="Inputs"]
+script = ExtResource("14_mpnbq")
+
+[node name="DownDown" type="Node" parent="Inputs/DownDownMaster"]
+script = ExtResource("13_7vb1f")
+input_sequence_right = Array[int]([4, 1, 4, 1])
+input_sequence_left = Array[int]([4, 1, 4, 1])
+
+[node name="DownDown2" type="Node" parent="Inputs/DownDownMaster"]
+script = ExtResource("13_7vb1f")
+input_sequence_right = Array[int]([4, 1, 4])
+input_sequence_left = Array[int]([4, 1, 4])
 
 [node name="Moves" type="Node" parent="."]
 

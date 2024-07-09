@@ -21,7 +21,8 @@ var input_history : Array[int]
 var available_moves : Array[Move]
 var can_do_moves : bool = true
 enum Directions {
-	NONE = 1 << 0,
+	ZERO = 0,
+	NONE = 1,
 	UP = 1 << 1,
 	DOWN = 1 << 2,
 	LEFT = 1 << 3,
@@ -214,9 +215,9 @@ func input_process():
 	elif x_axis == 1:
 		current_input_int = current_input_int ^ Directions.RIGHT
 	if y_axis == 0 and x_axis == 0:
-		current_input_int = Directions.NONE
+		current_input_int = 1
 	input_history.append(current_input_int)
-	if input_history.size() > 15:
+	if input_history.size() > 60:
 		input_history.remove_at(0)
 	
 func state_process():
