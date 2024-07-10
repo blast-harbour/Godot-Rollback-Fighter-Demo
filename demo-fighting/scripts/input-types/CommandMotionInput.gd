@@ -52,9 +52,10 @@ func check_valid(input_dict : Dictionary) -> bool:
 				if fighter.input_history[history_step] != input_sequence[steps_complete - 1]:
 					break
 			history_step -= 1
+			if (history_step) <= 60 - buffer_size:
+				break
 		else:
 			break
-		if (history_step * -1) >= fighter.input_history.size() -1 or (history_step * -1) >= buffer_size:
-			break
+		
 	
 	return input_condition
